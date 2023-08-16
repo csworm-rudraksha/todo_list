@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Document</title>
+    <style>
+        .container{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 class="text">TO DO List</h2>
+         
+            <div class="form">
+                <label for="title">title</label><br>
+                <input type="text" id="title" class="form"><br>
+            </div>
+            <div class="form">
+                <label for="description">description</label><br>
+                 <textarea class="form" id="description"   rows="4"></textarea><br>
+            </div>
+            <button type="submit" id="add" class="btn">add to list</button>
+        
+
+        <div id="items">
+            <h2>your items </h2>
+
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">S No.</th>
+                    <th scope="col">item title</th>
+                    <th scope="col">item description</th>
+                    <th scope="col">actions</th>
+                  </tr>
+                </thead>
+                <hr>
+                <tbody id="tablebody">
+                  <tr>
+                    <th scope="row">1</th>
+                    <td>get some coffee</td>
+                    <td>need coffe as you are coder</td>
+                    <td><button class="btn">delete</button></td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+    </div>
+
+
+
+    <script>
+        add = document.getElementById("add");
+        add.addEventListener("click",()=>{
+            console.log("updating list....")
+            tit = document.getElementById('title').value;
+            desc = document.getElementById('description').value ;
+            if(localStorage.getItem('itemsjson')== null){
+                itemsjsonArray= [];
+                itemsjsonArray.push([tit,desc]);
+                localStorage.setItem('itemsjson',JSON.stringify(itemsjsonArray));
+            }
+            else{
+                itemsjsonArraystr= localStorage.getItem('itemsjson');
+                itemsjsonArray = JSON.parse(itemsjsonArraystr);
+                itemsjsonArray.push([tit,desc]);
+                localStorage.setItem('itemsjson',JSON.stringify(itemsjsonArray));
+            }
+            tablebody = document.getElementById('tablebody');
+            str = "";
+            itemsjsonArray.forEach((element,index) => {
+                str += `
+                <tr>
+                    <th scope="row">${index+1}</th>
+                    <td>${element[0]}</td>
+                    <td>${element[1]}</td>
+                    <td><button class="btn">delete</button></td>
+                  </tr>`;
+            });
+            tablebody.innerHTML = str;
+        });
+        tablebody = document.getElementById('tablebody');
+            str = "";
+            itemsjsonArray.forEach((element,index) => {
+                str += `
+                <tr>
+                    <th scope="row">${index+1}</th>
+                    <td>${element[0]}</td>
+                    <td>${element[1]}</td>
+                    <td><button class="btn">delete</button></td>
+                  </tr>`;
+            });
+
+    </script>
+
+</body>
+</html>
