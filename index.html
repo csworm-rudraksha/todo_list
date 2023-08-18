@@ -10,7 +10,7 @@
 </head>
 <body>
     <div class="container">
-        <h2 class="text">TO DO List</h2>
+        <h2 class="text">TO DO List(under work)</h2>
          
             <div class="form">
                 <label for="title">title</label><br>
@@ -21,6 +21,7 @@
                  <textarea class="form" id="description"   rows="4"></textarea><br>
             </div>
             <button type="submit" id="add" class="btn">add to list</button>
+            <button type="submit" id="clear" class="btn">clear localStorage</button>
         
 
         <div id="items">
@@ -80,18 +81,10 @@
             });
             tablebody.innerHTML = str;
         });
-        tablebody = document.getElementById('tablebody');
-            str = "";
-            itemsjsonArray.forEach((element,index) => {
-                str += `
-                <tr>
-                    <th scope="row">${index+1}</th>
-                    <td>${element[0]}</td>
-                    <td>${element[1]}</td>
-                    <td><button class="btn">delete</button></td>
-                  </tr>`;
-            });
-
+        clear = document.getElementById("clear");
+        clear.addEventListener("click", () =>{
+            localStorage.clear();
+        });
     </script>
 
 </body>
